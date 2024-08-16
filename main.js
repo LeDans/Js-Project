@@ -66,21 +66,6 @@ function countryProfile(country) {
   document.getElementById("countries").appendChild(countryGroup);
 }
 
-const searchhelp = (array) => {
-  console.log(array);
-
-  array.forEach((el) => {
-    console.log(el);
-  });
-  // if (country.arguements.length > 1) {
-  //   for (index = 0; index < country.arguements.length; index++) {
-  //     country?.arguements && country?.arguements.toLowerCase().includes(value);
-  //   }
-  // } else {
-  //   country?.arguements && country?.arguements.toLowerCase().includes(value);
-  // }
-};
-
 function filterSearch() {
   const value = document.getElementById("searchBar").value.toLowerCase();
   const countriesContainer = document.getElementById("countries");
@@ -88,6 +73,8 @@ function filterSearch() {
 
   fetchCountries().then((data) => {
     console.log(data[0].cou);
+
+    const renderedCountries = new Set();
 
     const filteredData = data.filter(
       (country) =>
@@ -98,11 +85,17 @@ function filterSearch() {
         String(country.population).includes(value) ||
         (country?.flags.alt &&
           country?.flags.alt.toLowerCase().includes(value)) ||
-        searchhelp(country.altSpellings)
+        (country.altSpellings &&
+          country.altSpellings.some(spelling =>
+            spelling.toLowerCase().includes(value)
+          ))
     );
 
     filteredData.forEach((country) => {
-      countryProfile(country);
+      if (!renderedCountries.has(country.name.common)) {
+        countryProfile(country);
+        renderedCountries.add(country.name.common);
+      }
     });
   });
 }
