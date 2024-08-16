@@ -18,9 +18,11 @@ function countryProfile(country) {
   const countryRegion = document.createElement("div");
   const countryCapital = document.createElement("div");
   const buttonExpand = document.createElement("BUTTON");
-  const moreCountryInfo = document.createElement("li");
-  const countryOfficialName = document.createElement("ul");
-  const countryContinent = document.createElement("ul");
+  const moreCountryInfo = document.createElement("div");
+  const countryOfficialName = document.createElement("div");
+  const countryContinent = document.createElement("div");
+  const countryLanguages = document.createElement("div");
+  const countryCurrency = document.createElement("div");
   const countryFlag = document.createElement("img");
 
   countryName.textContent = country.name.common;
@@ -31,10 +33,10 @@ function countryProfile(country) {
   buttonExpand.addEventListener("click", function () {
     if (moreCountryInfo.style.display == "block") {
       moreCountryInfo.style.display = "none";
-      moreCountryInfo.style.animation = "ease-out";
+      buttonExpand.textContent = `↓`;
     } else {
       moreCountryInfo.style.display = "block";
-      moreCountryInfo.style.animation = "ease-out";
+      buttonExpand.textContent = `↑`;
     }
   });
   countryOfficialName.textContent = `Official Name: ${country.name.official}`;
@@ -47,6 +49,18 @@ function countryProfile(country) {
       countryContinent.textContent =
         countryContinent.textContent + `${country.continents[index]} `;
   }
+  // if (country.languages == undefined) {
+  //   return;
+  // } else if (country.languages.length < 2) {
+  //   countryLanguages.textContent = `Official Language: ${country.languages[0]}`;
+  // } else {
+  //   let index = 0;
+  //   for (index = 0; index < country.languages.length; index++)
+  //     countryLanguages.textContent =
+  //       countryLanguages.textContent = `Official Languages: ${country.languages[0]}`;
+  // }
+  // for..in(wont work) dynamic object property/key
+  // countryCurrency.textContent = `Currency: ${country.currencies[(0)[0]]}`;
   countryFlag.src = `${country.flags.svg}`;
 
   countryGroup.appendChild(countryName).setAttribute("id", "name");
@@ -61,8 +75,9 @@ function countryProfile(country) {
     .appendChild(countryOfficialName)
     .setAttribute("id", "official-name");
   moreCountryInfo.appendChild(countryContinent).setAttribute("id", "continent");
+  moreCountryInfo.appendChild(countryLanguages).setAttribute("id", "languages");
   moreCountryInfo.appendChild(countryFlag).setAttribute("id", "flag");
-
+  moreCountryInfo.appendChild(countryCurrency).setAttribute("id", "currency");
   document.getElementById("countries").appendChild(countryGroup);
 }
 
@@ -86,7 +101,7 @@ function filterSearch() {
         (country?.flags.alt &&
           country?.flags.alt.toLowerCase().includes(value)) ||
         (country.altSpellings &&
-          country.altSpellings.some(spelling =>
+          country.altSpellings.some((spelling) =>
             spelling.toLowerCase().includes(value)
           ))
     );
