@@ -18,14 +18,17 @@ const filterData = () => {
     }
   )
 
-  const fiteredData = fetchCountries().then(
+  const filteredData = fetchCountries().then(
     data => {
       searchBar.addEventListener('keyup', (event) =>{
         const value = event.target.value;
         filterSearch(value, data)
-      })  
+        
+      })
     }
   )
+    
+  
   
   const filterSearch = (value, data) => {
     
@@ -45,7 +48,7 @@ const filterData = () => {
 
       const countryPop = document.createElement("div");
       countryPop.classList.add("population")
-      countryPop.innerText = el.population
+      countryPop.innerText = el.population.toLocaleString()
 
       const countryRegion = document.createElement("div")
       countryRegion.classList.add("region")
@@ -63,27 +66,7 @@ const filterData = () => {
       countryProfile(el);
     })
 
-    let oldvalue = value;
-    for (let index = 0; index<filteredData.length; index++){
-      if (oldvalue != value){
-        country.removeChild(countryName,countryCapital,countryPop,countryRegion);
-        document.getElementById("countries").removeChild(country)
-        const countryRegion = document.remove("div")
-        const countryPop = document.remove("div")
-        const countryCapital = document.remove("div")
-        const countryName= document.remove("div")
-        
-      }else{
-        console.log(filteredData.length)
-        countryProfile(filteredData)
-      }
   
-    }
-    
-    
-
-    console.log(filteredData);
-    
     
     
 

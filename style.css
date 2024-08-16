@@ -49,6 +49,7 @@ body input{
   border: none;
   border-bottom: 2px solid #3dafc4;
   text-align: center;
+  font-size: x-large;
 }
 
 body input:hover {
@@ -63,10 +64,15 @@ body input:focus {
 }
 
 body div{
+  padding: 0.2rem;
   text-align:center;
   font-size: large;
   display: flex;
   flex-direction: column;
   align-content: space-around;
   flex-wrap: wrap;
+}
+
+.name{
+  padding: 0.5%;
 }
