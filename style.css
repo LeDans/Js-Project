@@ -35,9 +35,16 @@ a:hover {
   }
 }
 
+body {
+  margin: 1%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .title{
   display: flex;
   justify-content: center;
+  scale: 1.2;
 }
 
 body input{
@@ -67,12 +74,47 @@ body div{
   padding: 0.2rem;
   text-align:center;
   font-size: large;
-  display: flex;
-  flex-direction: column;
   align-content: space-around;
-  flex-wrap: wrap;
+  font-weight: 500;
+}
+
+#countries{
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  gap: 24px;
+  animation:ease-in 1s;
+}
+
+#countries {
+  animation:ease-in 1s;
 }
 
 .name{
   padding: 0.5%;
+}
+
+#name{
+  font-size: larger;
+  font-weight:bold;
+}
+
+#button-expand{
+  scale: 2;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#further-info-list {
+  list-style-type:none;
+  display: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height:50% ;
+}
+
+#flag{
+  max-width: 30%;
+  max-height: 30%;
 }
